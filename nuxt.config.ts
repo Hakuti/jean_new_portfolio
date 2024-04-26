@@ -10,15 +10,13 @@ export default defineNuxtConfig({
   typescript: {
     shim: false,
   },
-  supabase: {
-    redirect: false,
-  },
+ 
 
   build: {
     //   extractCSS: false,
     transpile: ["vuetify"],
   },
-  modules: ["@pinia/nuxt", "@nuxtjs/supabase"],
+  modules: ["@pinia/nuxt"],
   app: {
     head: {
       title: "Jean Canales",
