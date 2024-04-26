@@ -1,0 +1,29 @@
+.v-main{
+    --v-layout-top: 95px !important; 
+    color: rgb(var(--v-theme-muted)) !important;
+}
+.max-width-xl{
+    max-width: 1340px !important;
+    margin: 0 auto;
+}
+
+.scrolltop-btn{
+    position: fixed !important;
+    bottom: 30px;
+    right: 30px;
+    border-radius: 50%;
+    z-index: 50;
+}
+
+@media (max-width: 9999px) {
+    .v-container {
+        max-width: 1200px;
+    }
+}
+
+@media screen and (max-width:1200px){
+    body,html{
+        overflow-x: hidden;
+    }
+}
+

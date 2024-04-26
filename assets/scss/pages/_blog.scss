@@ -1,0 +1,34 @@
+.blog-text-area {
+    &::after {
+        content: "";
+        position: absolute;
+        right: -60px;
+        bottom: -50px;
+        width: 140px;
+        height: 140px;
+        z-index: 0;
+        background-image: url('/images/shape/Vectorabstract.svg');
+        background-repeat: no-repeat;
+    }
+}
+
+.share-btn {
+    .fb {
+        background-color: #526FA3;
+    }
+
+    .twitter {
+        background-color: #46C4FF;
+    }
+
+    .linkedin {
+        background-color: #3C86AD;
+    }
+}
+
+.dont-miss {
+    .v-field__input {
+        padding: 10px 20px;
+    }
+}
+

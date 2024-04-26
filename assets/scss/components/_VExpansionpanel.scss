@@ -1,0 +1,16 @@
+.v-expansion-panel-title__overlay{
+    background: transparent;
+}
+.v-expansion-panel--active > .v-expansion-panel-title{
+    color: rgb(var(--v-theme-primary)) !important;
+    border-bottom: 1px solid rgb(var(--v-theme-lightborder));
+}
+.v-expansion-panel--active:not(:first-child), .v-expansion-panel--active + .v-expansion-panel {
+     margin-top: 0;
+}
+.v-expansion-panel--active:not(:first-child)::after, .v-expansion-panel--active + .v-expansion-panel::after{
+    opacity: 1;
+}
+.v-expansion-panel:not(:first-child)::after{
+    border-color: rgb(var(--v-theme-lightborder));
+}

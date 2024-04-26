@@ -1,0 +1,30 @@
+.v-pagination {
+    .v-btn {
+        border: 1px solid rgb(var(--v-theme-lightborder)) !important;
+        font-weight: 400;
+    }
+
+    .v-pagination__item--is-active {
+        .v-btn {
+            color: rgb(var(--v-theme-surface)) !important;
+        }
+
+        .v-btn--variant-text .v-btn__overlay {
+            background: rgb(var(--v-theme-primary)) !important;
+            z-index: -1;
+            opacity: 1;
+        }
+    }
+
+    .v-pagination__next {
+        .v-btn {
+            border: 0 !important;
+        }
+    }
+
+    .v-pagination__prev {
+        .v-btn {
+            border: 0 !important;
+        }
+    }
+}

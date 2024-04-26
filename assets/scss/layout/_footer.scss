@@ -1,0 +1,48 @@
+.footer {
+    // &::after {
+    //     content: "";
+    //     position: absolute;
+    //     width: 647px;
+    //     height: 647px;
+    //     right: -140px;
+    //     bottom: 0;
+    //     z-index: 1;
+    //     background: rgb(var(--v-theme-lightprimary));
+    //     filter: blur(250px);
+    //     @media screen and (max-width:1200px){
+    //         right: 0px;
+    //         filter: blur(500px);
+    //     }
+    // }
+
+    ul {
+        li {
+            list-style: none;
+
+            a {
+                z-index: 2;
+
+                &:hover {
+                    color: rgb(var(--v-theme-primary)) !important;
+                }
+            }
+        }
+    }
+
+    .newsletter {
+        .v-field--active {
+            z-index: 2;
+            background: rgb(var(--v-theme-surface));
+        }
+
+        .v-field__outline__end {
+            border-radius: 0 0px 0px 0 !important;
+        }
+
+        .v-btn {
+            border-bottom-left-radius: 0 !important;
+            border-top-left-radius: 0 !important;
+            z-index: 2;
+        }
+    }
+}

@@ -1,0 +1,36 @@
+
+
+$opacity: (
+    'op-1': 1,
+    'op-03': 0.3,
+    'op-04': 0.4,
+    'op-05': 0.5,
+    'op-06': 0.6,
+    'op-07': 0.7,
+    'op-08': 0.8
+);
+
+@each $oppixel, $op in $opacity {
+    .#{$oppixel} {
+       opacity: $op;
+    }
+}
+
+$lineheight: (
+    'lh-10': 10px,
+    'lh-20': 20px,
+);
+
+@each $lineheight, $lh in $lineheight {
+    .#{$lineheight} {
+       line-height: $lh;
+    }
+}
+
+
+@each $oppixel, $op in $opacity {
+    .#{$oppixel} {
+       opacity: $op;
+    }
+}
+
