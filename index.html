@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jean Canales - Senior Full-Stack & Mobile Engineer</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,1,0" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            green: '#10B981', // Unburdened Green
+                            dark: '#022c22',
+                            red: '#EF4444',
+                            cream: '#FDFBF7',
+                            black: '#18181b',
+                            surface: '#ffffff',
+                            blue: '#3B82F6' // Added for tech/professional feel
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    boxShadow: {
+                        'phone': '0 50px 100px -20px rgba(0,0,0,0.25), 0 30px 60px -30px rgba(0,0,0,0.3)',
+                        'card': '0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03)',
+                        'float': '0 20px 40px -5px rgba(0,0,0,0.1)'
+                    },
+                    animation: {
+                        'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'ripple': 'ripple 1.5s infinite ease-out',
+                        'float': 'float 6s ease-in-out infinite',
+                        'pop': 'pop 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards',
+                        'slide-up': 'slideUp 0.5s ease-out forwards',
+                    },
+                    keyframes: {
+                        ripple: {
+                            '0%': { transform: 'scale(0.8)', opacity: '1' },
+                            '100%': { transform: 'scale(2.4)', opacity: '0' },
+                        },
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-10px)' },
+                        },
+                        pop: {
+                            '0%': { transform: 'scale(0.5)', opacity: '0' },
+                            '100%': { transform: 'scale(1)', opacity: '1' },
+                        },
+                        slideUp: {
+                            '0%': { transform: 'translateY(20px)', opacity: '0' },
+                            '100%': { transform: 'translateY(0)', opacity: '1' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            background-color: #FDFBF7;
+            overflow-x: hidden;
+        }
+        
+        ::-webkit-scrollbar { width: 0px; }
+
+        .mobile-app-card {
+            box-shadow: 0 20px 40px -10px rgba(0,0,0,0.15);
+            border: 1px solid rgba(0,0,0,0.05);
+            overflow: hidden;
+            background: white;
+            position: relative; 
+            margin-bottom: 0 !important;
+        }
+
+        .screen-content {
+            transition: opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1), transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            position: absolute;
+            inset: 0;
+            opacity: 0;
+            pointer-events: none;
+            transform: scale(0.95);
+            background: #F9FAFB;
+            overflow: hidden;
+            z-index: 10;
+        }
+        
+        .screen-content.active {
+            opacity: 1;
+            pointer-events: auto;
+            transform: scale(1);
+            z-index: 30;
+        }
+
+        @media (min-width: 1024px) {
+            .sticky-wrapper {
+                position: sticky;
+                top: 0;
+                height: 100vh;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+            section {
+                min-height: 100vh; 
+            }
+        }
+
+        .bg-map-pattern {
+            background-image: 
+                linear-gradient(#e5e7eb 1px, transparent 1px),
+                linear-gradient(90deg, #e5e7eb 1px, transparent 1px);
+            background-size: 20px 20px;
+        }
+        
+        .walking-path {
+            transition: transform 2.5s linear;
+        }
+        
+        /* Skill Badge */
+        .skill-badge {
+            @apply px-3 py-1 bg-white border border-gray-200 rounded-full text-xs font-medium text-gray-600 shadow-sm;
+        }
+    </style>
+</head>
+<body class="text-brand-black font-sans antialiased">
+
+    <!-- Nav -->
+    <nav class="fixed top-0 left-0 right-0 z-40 flex justify-center px-4 py-4 md:py-6">
+        <div class="bg-white/80 backdrop-blur-md border border-gray-200/50 shadow-sm rounded-full px-6 py-3 flex items-center justify-between w-full max-w-5xl">
+            <div class="flex items-center gap-3 font-bold text-lg md:text-xl tracking-tight">
+                <div class="w-10 h-10 bg-brand-black text-white rounded-full flex items-center justify-center text-lg font-black">JC</div>
+                Jean Canales
+            </div>
+            <div class="flex items-center gap-4">
+                <a href="#work" class="hidden md:block text-sm font-medium text-gray-600 hover:text-brand-black transition-colors whitespace-nowrap">Work</a>
+                <a href="#unburdened" class="hidden md:block text-sm font-medium text-gray-600 hover:text-brand-black transition-colors whitespace-nowrap">Unburdened</a>
+                <a href="mailto:can1927@gmail.com" class="bg-brand-black text-white px-5 py-2 rounded-full font-semibold text-sm hover:bg-brand-green transition-colors duration-300 whitespace-nowrap">
+                    Contact Me
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- HERO SECTION -->
+    <header class="min-h-[90vh] flex flex-col justify-center items-center text-center px-6 pt-32 pb-20 relative overflow-hidden">
+        <div class="absolute inset-0 bg-[radial-gradient(circle_at_top_right,_var(--tw-gradient-stops))] from-brand-green/10 to-transparent opacity-50 pointer-events-none"></div>
+        
+        <div class="relative z-10 max-w-4xl mx-auto">
+            <div class="inline-flex items-center gap-2 bg-brand-black/5 px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider mb-8 animate-pop">
+                <span class="w-2 h-2 bg-brand-green rounded-full animate-pulse"></span>
+                Available for new opportunities
+            </div>
+            <h1 class="text-5xl md:text-7xl lg:text-8xl font-black text-brand-black tracking-tighter leading-[0.95] mb-8">
+                I build products that <br>
+                <span class="text-brand-green relative inline-block">
+                    actually work.
+                    <svg class="absolute w-full h-3 -bottom-1 left-0 text-brand-green/30" viewBox="0 0 100 10" preserveAspectRatio="none"><path d="M0 5 Q 50 10 100 5" stroke="currentColor" stroke-width="8" fill="none" /></svg>
+                </span>
+            </h1>
+            <p class="text-xl text-gray-600 font-medium leading-relaxed max-w-2xl mx-auto mb-10">
+                Senior Full-Stack & Mobile Engineer with 6+ years of experience. Specialist in taking complex ideas—AI agents, geospatial engines, native modules—and turning them into polished, production-grade products.
+            </p>
+            
+            <div class="flex flex-wrap justify-center gap-3 mb-12 opacity-80">
+                <span class="skill-badge">React Native</span>
+                <span class="skill-badge">Swift & iOS Modules</span>
+                <span class="skill-badge">Vue / Nuxt</span>
+                <span class="skill-badge">Node.js</span>
+                <span class="skill-badge">AI Orchestration</span>
+                <span class="skill-badge">TypeScript</span>
+            </div>
+
+            <div class="flex flex-col sm:flex-row justify-center gap-4">
+                <a href="#unburdened" class="bg-brand-black text-white px-8 py-4 rounded-full font-bold text-lg shadow-xl shadow-brand-black/20 hover:translate-y-[-2px] transition-all flex items-center justify-center gap-2">
+                    View Featured Project
+                    <span class="material-symbols-rounded">arrow_downward</span>
+                </a>
+                <a href="https://www.linkedin.com/in/jean-canales-6b1441a7/" target="_blank" class="px-8 py-4 rounded-full font-bold text-lg text-brand-dark border border-gray-200 hover:bg-white transition-colors flex items-center justify-center gap-2">
+                    LinkedIn
+                    <span class="material-symbols-rounded text-sm">open_in_new</span>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- FEATURED PROJECT: UNBURDENED -->
+    <div id="unburdened" class="relative border-t border-gray-200 bg-white">
+        
+        <!-- Project Header -->
+        <div class="pt-24 pb-12 text-center px-6">
+             <div class="inline-flex items-center gap-2 bg-brand-green/10 text-brand-green px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider mb-4">
+                Featured Case Study
+            </div>
+            <h2 class="text-4xl md:text-5xl font-black text-brand-black tracking-tight mb-4">Unburdened</h2>
+            <p class="text-lg text-gray-500 max-w-xl mx-auto">
+                Founder & Lead Engineer. A next-generation financial behavior engine combining native iOS controls, geofencing, and AI intervention.
+            </p>
+        </div>
+
+        <!-- DYNAMIC SCROLL SECTION (Reused from landing page logic) -->
+        <div class="relative">
+             <!-- RIGHT SIDE: Sticky Phone (Desktop Only) -->
+            <div class="hidden lg:block absolute right-0 top-0 w-1/2 h-full z-20 pointer-events-none">
+                <div class="sticky-wrapper">
+                    <!-- Phone Frame -->
+                    <div class="relative w-[360px] h-[740px] bg-brand-black rounded-[3.5rem] shadow-phone border-[12px] border-brand-black overflow-hidden transform transition-transform duration-700">
+                        <div class="absolute top-0 left-1/2 -translate-x-1/2 w-32 h-8 bg-black rounded-b-2xl z-50"></div>
+                        
+                        <!-- SCREEN 1: GEOFENCING & SIMULATION -->
+                        <div id="desktop-screen-1" class="screen-content active flex flex-col bg-gray-50">
+                            <div class="absolute inset-0 bg-map-pattern opacity-50"></div>
+                            <div class="absolute inset-0 overflow-hidden">
+                                <div class="absolute top-1/3 left-1/2 -translate-x-1/2 w-64 h-64 border-2 border-brand-red/30 rounded-full bg-brand-red/5 flex items-center justify-center animate-pulse-slow">
+                                    <div class="w-48 h-48 border-2 border-brand-red/50 rounded-full bg-brand-red/10 flex items-center justify-center">
+                                        <div class="w-4 h-4 bg-brand-red rounded-full shadow-[0_0_20px_rgba(239,68,68,0.6)] z-10 relative"></div>
+                                    </div>
+                                </div>
+                                <div id="dt-sim-user" class="absolute bottom-32 left-10 w-12 h-12 bg-blue-500/20 rounded-full flex items-center justify-center walking-path z-20 opacity-0">
+                                    <div class="w-4 h-4 bg-blue-500 rounded-full shadow-lg border-2 border-white"></div>
+                                </div>
+                            </div>
+                            <div id="dt-sim-controls" class="mt-auto bg-white rounded-t-3xl p-6 shadow-[0_-10px_40px_rgba(0,0,0,0.05)] z-30 relative">
+                                <div class="w-12 h-1.5 bg-gray-200 rounded-full mx-auto mb-6"></div>
+                                <h3 class="text-xl font-bold mb-1">Set Zone Location</h3>
+                                <p class="text-gray-500 text-sm mb-6">Triggers whenever you enter this area.</p>
+                                <button id="dt-sim-save-btn" class="w-full bg-brand-green text-white py-3.5 rounded-xl font-bold text-base shadow-lg shadow-brand-green/25 transition-all">Save Zone</button>
+                            </div>
+                            <div id="dt-sim-toast" class="absolute top-12 left-4 right-4 bg-brand-black/90 backdrop-blur text-white p-3 rounded-xl shadow-xl translate-y-[-150%] transition-all duration-500 z-40 flex items-center gap-3">
+                                <div class="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
+                                <div class="text-sm font-medium">Monitoring Active...</div>
+                            </div>
+                            
+                            <!-- Call Overlay -->
+                            <div id="dt-screen-call" class="absolute inset-0 hidden flex-col justify-center bg-gray-900 text-white z-50">
+                                <div class="relative z-10 flex flex-col h-full p-8 pt-20 text-center items-center">
+                                    <div class="flex flex-col items-center mb-auto">
+                                        <div class="w-24 h-24 rounded-full bg-gray-800 border-4 border-gray-700 flex items-center justify-center mb-6">
+                                            <img src="https://api.dicebear.com/7.x/bottts/svg?seed=Maya" class="w-20 h-20 rounded-full">
+                                        </div>
+                                        <h2 class="text-3xl font-bold mb-1 text-white">Unburdened AI</h2>
+                                        <p class="text-brand-green font-bold text-sm uppercase tracking-widest mb-4">Incoming Intervention</p>
+                                    </div>
+                                    <div class="flex justify-between w-full gap-8 px-4">
+                                        <button class="w-20 h-20 rounded-full bg-red-500 flex items-center justify-center shadow-lg"><span class="material-symbols-rounded text-3xl">call_end</span></button>
+                                        <button id="dt-sim-answer-btn" class="w-20 h-20 rounded-full bg-green-500 flex items-center justify-center shadow-lg animate-pulse"><span class="material-symbols-rounded text-3xl">call</span></button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Active Call -->
+                            <div id="dt-screen-active-call" class="absolute inset-0 flex-col items-center pt-24 px-6 bg-brand-black hidden z-50">
+                                <img src="https://api.dicebear.com/7.x/bottts/svg?seed=Maya" class="w-32 h-32 rounded-full border-4 border-brand-green mb-6 animate-float bg-gray-800">
+                                <h3 class="text-white text-2xl font-black mb-1">Maya</h3>
+                                <p class="text-brand-green font-mono text-xs tracking-widest uppercase mb-8">Active Intervention...</p>
+                                <div class="w-full space-y-4">
+                                    <div id="dt-bubble-1" class="bg-white/10 backdrop-blur-md p-4 rounded-2xl rounded-tl-sm text-white text-sm border border-white/5 opacity-0 transform scale-90 transition-all duration-500">I see you walking into Target. 🎯</div>
+                                    <div id="dt-bubble-2" class="bg-brand-red/20 backdrop-blur-md border border-brand-red/40 p-4 rounded-2xl rounded-tr-sm text-white text-sm ml-auto max-w-[90%] opacity-0 transform scale-90 transition-all duration-500">You don't need another candle. Go home. 🛑</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- SCREEN 2: PAYMENT REMINDERS -->
+                        <div id="desktop-screen-2" class="screen-content flex flex-col bg-gray-50 p-6 justify-center">
+                             <div id="dt-remind-setup" class="bg-white w-full rounded-[2rem] p-8 shadow-float border border-gray-100 transition-all duration-500">
+                                <h3 class="font-bold text-xl mb-6">New Reminder</h3>
+                                <div class="space-y-4 mb-6">
+                                    <div class="p-4 bg-gray-50 rounded-xl border border-gray-100"><p class="text-xs text-gray-400 font-bold uppercase">Name</p><p class="font-bold text-gray-800">Netflix</p></div>
+                                    <div class="flex gap-4"><div class="flex-1 p-4 bg-gray-50 rounded-xl border border-gray-100"><p class="text-xs text-gray-400 font-bold uppercase">Date</p><p class="font-bold text-gray-800">15th</p></div></div>
+                                </div>
+                                <button id="dt-remind-btn" class="w-full py-3.5 rounded-xl bg-blue-500 text-white font-bold text-sm shadow-lg">Set Reminder</button>
+                            </div>
+                            
+                            <div id="dt-remind-time-lapse" class="absolute inset-0 bg-black/90 z-50 flex items-center justify-center text-white opacity-0 pointer-events-none transition-opacity duration-500">
+                                <div class="text-center"><span class="material-symbols-rounded text-4xl mb-2 animate-pulse">calendar_month</span><p class="font-mono text-lg">One Month Later...</p></div>
+                            </div>
+
+                            <div id="dt-remind-call" class="absolute inset-0 bg-gray-900 z-40 hidden flex-col justify-center text-white">
+                                <div class="relative z-10 flex flex-col h-full p-8 pt-20 text-center items-center">
+                                    <div class="flex flex-col items-center mb-auto">
+                                        <div class="w-24 h-24 rounded-full bg-gray-800 border border-gray-700 flex items-center justify-center mb-6 shadow-2xl shadow-blue-500/20"><img src="https://api.dicebear.com/7.x/bottts/svg?seed=Maya" class="w-20 h-20 rounded-full"></div>
+                                        <h2 class="text-3xl font-bold mb-1 text-white">Unburdened AI</h2>
+                                        <p class="text-blue-400 font-bold text-sm uppercase tracking-widest mb-4">Payment Reminder</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div id="dt-remind-active" class="absolute inset-0 bg-brand-black z-50 hidden flex-col items-center pt-24 px-6">
+                                <img src="https://api.dicebear.com/7.x/bottts/svg?seed=Maya" class="w-32 h-32 rounded-full border-4 border-blue-500 shadow-[0_0_50px_rgba(59,130,246,0.3)] mb-6 animate-float bg-gray-800">
+                                <h3 class="text-white text-2xl font-black mb-1">Maya</h3>
+                                <p class="text-blue-400 font-mono text-xs tracking-widest uppercase mb-8">Payment Check-in...</p>
+                                <div class="w-full space-y-4">
+                                    <div id="dt-remind-bubble" class="bg-white/10 backdrop-blur-md p-4 rounded-2xl rounded-tl-sm text-white text-sm border border-white/5 opacity-0 transform scale-90 transition-all duration-500">Netflix hits tomorrow. Do you have the $15? 💸</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+             <!-- LEFT SIDE: Scroll Content -->
+             <div class="w-full lg:w-1/2 relative z-10">
+                <!-- Section 1 -->
+                <section id="section-1" class="flex flex-col justify-center px-6 md:px-16 py-12 lg:py-24 lg:min-h-screen">
+                    <div class="mb-6 lg:mb-0">
+                        <h3 class="text-brand-green font-bold uppercase tracking-widest text-xs mb-2">Geofencing & AI</h3>
+                        <h2 class="text-3xl md:text-5xl font-black text-brand-dark tracking-tighter mb-6">Stop spending before you swipe.</h2>
+                        <p class="text-lg text-gray-600 leading-relaxed mb-6">
+                            Budgeting apps just report the damage. Unburdened uses geofencing to catch you <strong>in the moment</strong> you walk into a store.
+                        </p>
+                        <ul class="space-y-2 text-sm text-gray-500">
+                            <li class="flex gap-2"><span class="text-brand-green">✓</span> High-precision Google Places detection</li>
+                            <li class="flex gap-2"><span class="text-brand-green">✓</span> Real-time AI voice interventions</li>
+                            <li class="flex gap-2"><span class="text-brand-green">✓</span> Native iOS integration</li>
+                        </ul>
+                    </div>
+                    <!-- Mobile Visual 1 -->
+                    <div class="lg:hidden w-full max-w-[340px] mx-auto aspect-[9/16] bg-gray-50 rounded-[2.5rem] mobile-app-card relative overflow-hidden border-8 border-white shadow-2xl">
+                         <!-- Mobile content mirrors desktop logic via JS (simplified for brevity here, using same IDs as before but with 'mob-' prefix) -->
+                        <div class="absolute inset-0 bg-map-pattern opacity-50"></div>
+                        <div id="mob-sim-user" class="absolute bottom-32 left-10 w-12 h-12 bg-blue-500/20 rounded-full flex items-center justify-center z-20"><div class="w-4 h-4 bg-blue-500 rounded-full shadow-lg border-2 border-white"></div></div>
+                        <div id="mob-sim-controls" class="absolute bottom-0 left-0 right-0 bg-white rounded-t-3xl p-6 shadow-[0_-10px_40px_rgba(0,0,0,0.05)] z-30"><button id="mob-sim-save-btn" class="w-full bg-brand-green text-white py-3 rounded-xl font-bold text-sm shadow-lg">Save Zone</button></div>
+                        <!-- ... other mobile sim elements ... -->
+                    </div>
+                </section>
+
+                <!-- Section 2 -->
+                <section id="section-2" class="flex flex-col justify-center px-6 md:px-16 py-12 lg:py-24 lg:min-h-screen">
+                    <div class="mb-6 lg:mb-0">
+                        <h3 class="text-blue-600 font-bold uppercase tracking-widest text-xs mb-2">Smart Reminders</h3>
+                        <h2 class="text-3xl md:text-5xl font-black text-brand-dark tracking-tighter mb-6">AI Payment & Savings Agent.</h2>
+                        <p class="text-lg text-gray-600 leading-relaxed mb-6">
+                            Get AI call payment reminders for manual payments and savings reminders. Just set it up in chat and watch it work.
+                        </p>
+                    </div>
+                     <!-- Mobile Visual 2 -->
+                     <div class="lg:hidden w-full max-w-[340px] mx-auto bg-white rounded-[2.5rem] mobile-app-card relative overflow-hidden border-8 border-white shadow-2xl h-[400px]">
+                        <div id="mob-remind-setup" class="absolute inset-0 p-6 flex flex-col justify-center"><button id="mob-remind-btn" class="w-full py-3 rounded-xl bg-blue-500 text-white font-bold text-xs shadow-lg">Set Reminder</button></div>
+                        <!-- ... other mobile sim elements ... -->
+                    </div>
+                </section>
+             </div>
+        </div>
+    </div>
+
+    <!-- WORK EXPERIENCE -->
+    <div id="work" class="bg-gray-50 py-24 border-t border-gray-200">
+        <div class="max-w-5xl mx-auto px-6">
+            <h2 class="text-3xl font-black text-brand-black mb-12 text-center">Work Experience</h2>
+
+            <div class="space-y-8">
+                <!-- Job 1 -->
+                <div class="bg-white p-8 rounded-3xl shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
+                    <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-4">
+                        <div>
+                            <h3 class="text-xl font-bold text-brand-black">Ads.com</h3>
+                            <p class="text-brand-green font-medium">Frontend Developer (VueJS, MySQL, PHP)</p>
+                        </div>
+                        <span class="text-sm text-gray-400 mt-2 md:mt-0">Oct 2023 - Present</span>
+                    </div>
+                    <ul class="list-disc list-inside space-y-2 text-gray-600 text-sm leading-relaxed">
+                        <li>Led the critical migration of the core customer-facing application UI from Vue 2 to Vue 3, upgrading dozens of components and state management to Pinia.</li>
+                        <li>Co-developed and owned the new administrative UI for a core product launch using Nuxt.js and Figma specifications.</li>
+                        <li>Engineered a high-performance RSOC article platform using Hugo templates, achieving a Lighthouse Performance Score of 98.</li>
+                        <li>Mentored junior developers and enforced code quality standards.</li>
+                    </ul>
+                </div>
+
+                <!-- Job 2 -->
+                <div class="bg-white p-8 rounded-3xl shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
+                    <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-4">
+                        <div>
+                            <h3 class="text-xl font-bold text-brand-black">Spenser App Inc</h3>
+                            <p class="text-brand-green font-medium">Full Stack Developer (React, NodeJs, MySQL)</p>
+                        </div>
+                        <span class="text-sm text-gray-400 mt-2 md:mt-0">Dec 2022 - May 2025</span>
+                    </div>
+                    <ul class="list-disc list-inside space-y-2 text-gray-600 text-sm leading-relaxed">
+                        <li>Built a vending machine discovery platform combining geospatial lookups and category prediction.</li>
+                        <li>Implemented AI-driven RAG search using Haystack, Weaviate, and Llama/Ollama to answer product questions.</li>
+                        <li>Developed a data ingestion pipeline using Node.js, Medusa, and TypeORM to import thousands of businesses.</li>
+                        <li>Created an automated pipeline to scrape product pages powered entirely by LLM logic.</li>
+                    </ul>
+                </div>
+
+                <!-- Job 3 -->
+                <div class="bg-white p-8 rounded-3xl shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
+                    <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-4">
+                        <div>
+                            <h3 class="text-xl font-bold text-brand-black">Birchnotes (Therapax)</h3>
+                            <p class="text-brand-green font-medium">Full Stack Developer (VueJS, MySQL, NodeJS)</p>
+                        </div>
+                        <span class="text-sm text-gray-400 mt-2 md:mt-0">May 2021 - Dec 2022</span>
+                    </div>
+                    <ul class="list-disc list-inside space-y-2 text-gray-600 text-sm leading-relaxed">
+                        <li>Built and maintained a library of reusable Vue.js components.</li>
+                        <li>Designed and implemented a file upload and storage system.</li>
+                        <li>Extended the capabilities of Knex.js for more flexible MySQL querying.</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="text-center mt-12">
+                <a href="Jean_Canales_Resume.pdf" download class="inline-flex items-center gap-2 text-brand-black font-bold border-b-2 border-brand-black pb-0.5 hover:text-brand-green hover:border-brand-green transition-colors">
+                    Download Full Resume
+                    <span class="material-symbols-rounded text-sm">download</span>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="bg-brand-black text-white py-20 px-6 text-center">
+        <div class="max-w-4xl mx-auto">
+            <div class="w-16 h-16 bg-brand-green rounded-2xl flex items-center justify-center text-white mx-auto mb-8 text-2xl font-black">JC</div>
+            <h2 class="text-3xl md:text-5xl font-black mb-6 tracking-tight">Let's build something real.</h2>
+            <p class="text-gray-400 mb-10 max-w-lg mx-auto">
+                I specialize in taking complex ideas—AI engines, mobile apps, ingestion systems—and turning them into polished products.
+            </p>
+            <a href="mailto:can1927@gmail.com" class="bg-white text-brand-black px-10 py-4 rounded-full font-bold text-lg hover:bg-brand-green transition-colors inline-block">
+                Get in Touch
+            </a>
+            <p class="mt-12 text-gray-600 text-sm">
+                © 2025 Jean Canales. All rights reserved. <br>
+                Based in Tampa Bay, FL.
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        // --- DOWNLOAD FEATURE ---
+        function downloadHTML() {
+            const docClone = document.documentElement.cloneNode(true);
+            const btn = docClone.querySelector('.dl-btn');
+            if (btn) btn.remove();
+            const htmlContent = docClone.outerHTML;
+            const blob = new Blob([htmlContent], { type: 'text/html' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'jean-canales-portfolio.html';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+        }
+
+        // --- SIMULATION CONTROLLERS ---
+        // (Reusing logic from previous artifact but targeting new IDs)
+        
+        class SimulationController {
+            constructor(prefix) {
+                this.prefix = prefix;
+                this.isRunning = false;
+            }
+            getElement(id) { return document.getElementById(this.prefix + id); }
+            
+            run() {
+                if (this.isRunning) return;
+                this.isRunning = true;
+                
+                const user = this.getElement('sim-user');
+                const controls = this.getElement('sim-controls');
+                const toast = this.getElement('sim-toast');
+                const saveBtn = this.getElement('sim-save-btn');
+                const callScreen = this.getElement('screen-call');
+                const activeCallScreen = this.getElement('screen-active-call');
+                const answerBtn = this.getElement('sim-answer-btn');
+                const bubble1 = this.getElement('bubble-1');
+                const bubble2 = this.getElement('bubble-2');
+
+                if (!user || !controls) { this.isRunning = false; return; }
+
+                // Reset
+                user.style.transition = 'none';
+                user.style.transform = 'none';
+                user.style.opacity = '0';
+                toast.style.transform = 'translateY(-150%)';
+                saveBtn.style.transform = 'scale(1)';
+                saveBtn.style.backgroundColor = '#10B981';
+                callScreen.classList.add('hidden');
+                callScreen.classList.remove('flex');
+                activeCallScreen.classList.add('hidden');
+                activeCallScreen.classList.remove('flex');
+                if(bubble1) bubble1.style.opacity = '0';
+                if(bubble2) bubble2.style.opacity = '0';
+
+                // 1. Save
+                setTimeout(() => {
+                    saveBtn.style.transform = 'scale(0.95)';
+                    saveBtn.style.backgroundColor = '#059669';
+                    setTimeout(() => saveBtn.style.transform = 'scale(1)', 200);
+                }, 1000);
+
+                // 2. Hide Controls
+                setTimeout(() => {
+                    controls.style.transform = 'translateY(150%)';
+                    toast.style.transform = 'translateY(0)';
+                }, 1800);
+
+                // 3. Walk
+                setTimeout(() => {
+                    user.style.opacity = '1';
+                    user.style.transition = 'transform 3s linear';
+                    user.style.transform = 'translate(100px, -140px)';
+                }, 2500);
+
+                // 4. Call
+                setTimeout(() => {
+                    callScreen.classList.remove('hidden');
+                    callScreen.classList.add('flex');
+                }, 5500);
+
+                // 5. Answer
+                setTimeout(() => {
+                    if(answerBtn) answerBtn.style.transform = 'scale(0.9)';
+                }, 8000);
+
+                // 6. Active
+                setTimeout(() => {
+                    callScreen.classList.add('hidden');
+                    callScreen.classList.remove('flex');
+                    activeCallScreen.classList.remove('hidden');
+                    activeCallScreen.classList.add('flex');
+                }, 8500);
+
+                // 7. Bubbles
+                setTimeout(() => { if(bubble1) { bubble1.style.opacity = '1'; bubble1.style.transform = 'scale(1)'; } }, 9000);
+                setTimeout(() => { if(bubble2) { bubble2.style.opacity = '1'; bubble2.style.transform = 'scale(1)'; } }, 10000);
+
+                setTimeout(() => { this.isRunning = false; this.run(); }, 14000);
+            }
+        }
+
+        class ReminderSimulationController {
+            constructor(prefix) {
+                this.prefix = prefix;
+                this.isRunning = false;
+            }
+            getElement(id) { return document.getElementById(this.prefix + id); }
+
+            run() {
+                if (this.isRunning) return;
+                this.isRunning = true;
+
+                const setupPanel = this.getElement('remind-setup');
+                const setBtn = this.getElement('remind-btn');
+                const timeLapse = this.getElement('remind-time-lapse');
+                const callScreen = this.getElement('remind-call');
+                const activeScreen = this.getElement('remind-active');
+                const bubble = this.getElement('remind-bubble');
+
+                if (!setupPanel) { this.isRunning = false; return; }
+
+                // Reset
+                setupPanel.style.opacity = '1';
+                timeLapse.style.opacity = '0';
+                callScreen.classList.add('hidden');
+                callScreen.classList.remove('flex');
+                activeScreen.classList.add('hidden');
+                activeScreen.classList.remove('flex');
+                if(bubble) bubble.style.opacity = '0';
+
+                // 1. Click
+                setTimeout(() => {
+                    setBtn.style.transform = 'scale(0.95)';
+                    setTimeout(() => setBtn.style.transform = 'scale(1)', 200);
+                }, 1000);
+
+                // 2. Fade Setup
+                setTimeout(() => { setupPanel.style.opacity = '0'; }, 2000);
+
+                // 3. Time Lapse
+                setTimeout(() => { timeLapse.style.opacity = '1'; }, 2500);
+
+                // 4. Call
+                setTimeout(() => {
+                    timeLapse.style.opacity = '0';
+                    callScreen.classList.remove('hidden');
+                    callScreen.classList.add('flex');
+                }, 4500);
+
+                // 5. Active
+                setTimeout(() => {
+                    callScreen.classList.add('hidden');
+                    callScreen.classList.remove('flex');
+                    activeScreen.classList.remove('hidden');
+                    activeScreen.classList.add('flex');
+                }, 7000);
+
+                // 6. Bubble
+                setTimeout(() => { if(bubble) { bubble.style.opacity = '1'; bubble.style.transform = 'scale(1)'; } }, 7500);
+
+                setTimeout(() => { this.isRunning = false; this.run(); }, 12000);
+            }
+        }
+
+        const desktopSim = new SimulationController('dt-');
+        const desktopRemindSim = new ReminderSimulationController('dt-');
+        
+        // Placeholder for mobile logic if needed, currently hidden via lg:hidden blocks but logic can be duplicated if you want mobile sims too
+
+        if (window.innerWidth >= 1024) {
+            const screens = {
+                'section-1': document.getElementById('desktop-screen-1'),
+                'section-2': document.getElementById('desktop-screen-2') // Payment Reminders
+            };
+            const sections = [
+                document.getElementById('section-1'),
+                document.getElementById('section-2')
+            ];
+            
+            const observerOptions = { root: null, rootMargin: "-50% 0px -50% 0px", threshold: 0 };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const sectionId = entry.target.id;
+                        Object.values(screens).forEach(s => { if(s) s.classList.remove('active'); });
+                        
+                        // Switch screens
+                        if(sectionId === 'section-1') {
+                            screens['section-1'].classList.add('active');
+                            if (!desktopSim.isRunning) desktopSim.run();
+                        } else if (sectionId === 'section-2') {
+                            screens['section-2'].classList.add('active'); // Reusing ID slot for simplicity
+                             if (!desktopRemindSim.isRunning) desktopRemindSim.run();
+                        }
+                    }
+                });
+            }, observerOptions);
+
+            sections.forEach(section => observer.observe(section));
+        }
+    </script>
+</body>
+</html>
