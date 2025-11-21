@@ -403,6 +403,48 @@
                         <li>Extended the capabilities of Knex.js for more flexible MySQL querying.</li>
                     </ul>
                 </div>
+
+                <!-- Job 4 -->
+                <div class="bg-white p-8 rounded-3xl shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
+                    <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-4">
+                        <div>
+                            <h3 class="text-xl font-bold text-brand-black">Freelance Developer</h3>
+                            <p class="text-brand-green font-medium">Full Stack Developer</p>
+                        </div>
+                        <span class="text-sm text-gray-400 mt-2 md:mt-0">2019 - May 2021</span>
+                    </div>
+                    <ul class="list-disc list-inside space-y-2 text-gray-600 text-sm leading-relaxed">
+                        <li>Developed custom web applications for various clients using modern JavaScript frameworks.</li>
+                        <li>Collaborated with clients to understand requirements and deliver scalable solutions.</li>
+                        <li>Maintained and optimized existing codebases for improved performance.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Expandable Section -->
+            <div id="more-experience" class="hidden space-y-8 mt-8">
+                <!-- Additional jobs can be added here -->
+                <!-- Job 5 - Example placeholder -->
+                <div class="bg-white p-8 rounded-3xl shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
+                    <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-4">
+                        <div>
+                            <h3 class="text-xl font-bold text-brand-black">Additional Experience</h3>
+                            <p class="text-brand-green font-medium">See full resume for complete work history</p>
+                        </div>
+                        <span class="text-sm text-gray-400 mt-2 md:mt-0">Earlier Positions</span>
+                    </div>
+                    <p class="text-gray-600 text-sm leading-relaxed">
+                        For a complete list of all work experience, projects, and achievements, please download the full resume below.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Expand/Collapse Button -->
+            <div class="text-center mt-8">
+                <button id="toggle-experience" class="inline-flex items-center gap-2 text-brand-black font-semibold px-6 py-3 rounded-full border-2 border-brand-black hover:bg-brand-black hover:text-white transition-all duration-300">
+                    <span id="toggle-text">Show More Experience</span>
+                    <span class="material-symbols-rounded text-sm" id="toggle-icon">expand_more</span>
+                </button>
             </div>
             
             <div class="text-center mt-12">
@@ -636,6 +678,29 @@
             }, observerOptions);
 
             sections.forEach(section => observer.observe(section));
+        }
+
+        // --- EXPAND/COLLAPSE EXPERIENCE ---
+        const toggleBtn = document.getElementById('toggle-experience');
+        const moreExperience = document.getElementById('more-experience');
+        const toggleText = document.getElementById('toggle-text');
+        const toggleIcon = document.getElementById('toggle-icon');
+
+        if (toggleBtn && moreExperience) {
+            toggleBtn.addEventListener('click', () => {
+                const isHidden = moreExperience.classList.contains('hidden');
+                
+                if (isHidden) {
+                    moreExperience.classList.remove('hidden');
+                    moreExperience.style.animation = 'slideUp 0.5s ease-out forwards';
+                    toggleText.textContent = 'Show Less Experience';
+                    toggleIcon.textContent = 'expand_less';
+                } else {
+                    moreExperience.classList.add('hidden');
+                    toggleText.textContent = 'Show More Experience';
+                    toggleIcon.textContent = 'expand_more';
+                }
+            });
         }
     </script>
 </body>
