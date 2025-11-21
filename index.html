@@ -915,40 +915,58 @@
             const mobileSection1 = document.getElementById('section-1');
             const mobileSection2 = document.getElementById('section-2');
             
+            // Track previous visibility state for each section
+            const sectionStates = {
+                'section-1': { wasAbove50: false, animationStarted: false },
+                'section-2': { wasAbove50: false, animationStarted: false }
+            };
+            
             const mobileObserver = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
-                    // Check if more than 50% visible
-                    const intersectionRatio = entry.intersectionRatio;
-                    const isMoreThan50Percent = intersectionRatio > 0.5;
-                    
                     const sectionId = entry.target.id;
+                    const intersectionRatio = entry.intersectionRatio;
+                    const isMoreThan50Percent = intersectionRatio >= 0.5;
+                    const state = sectionStates[sectionId];
                     
-                    if (entry.isIntersecting && isMoreThan50Percent) {
-                        // Section is more than 50% visible - start animation
+                    if (!state) return;
+                    
+                    // Only start animation when crossing 50% threshold from below
+                    if (entry.isIntersecting && isMoreThan50Percent && !state.wasAbove50) {
+                        // Section just crossed 50% threshold - start animation
                         if (sectionId === 'section-1') {
-                            // Stop and restart animation fresh
                             mobileSim.stop();
-                            setTimeout(() => mobileSim.run(), 100);
-                        }
-                        if (sectionId === 'section-2') {
-                            // Stop and restart animation fresh
+                            setTimeout(() => {
+                                mobileSim.run();
+                                state.animationStarted = true;
+                            }, 100);
+                        } else if (sectionId === 'section-2') {
                             mobileRemindSim.stop();
-                            setTimeout(() => mobileRemindSim.run(), 100);
+                            setTimeout(() => {
+                                mobileRemindSim.run();
+                                state.animationStarted = true;
+                            }, 100);
                         }
+                        state.wasAbove50 = true;
+                    } else if (!entry.isIntersecting || !isMoreThan50Percent) {
+                        // Section is below 50% or not intersecting - stop animation and reset state
+                        if (sectionId === 'section-1') {
+                            mobileSim.stop();
+                        } else if (sectionId === 'section-2') {
+                            mobileRemindSim.stop();
+                        }
+                        state.wasAbove50 = false;
+                        state.animationStarted = false;
                     } else {
-                        // Section is not visible enough - stop animation
-                        if (sectionId === 'section-1') {
-                            mobileSim.stop();
-                        }
-                        if (sectionId === 'section-2') {
-                            mobileRemindSim.stop();
-                        }
+                        // Section is still above 50% - maintain state
+                        state.wasAbove50 = true;
                     }
                 });
-            }, { threshold: [0, 0.25, 0.5, 0.75, 1] }); // Multiple thresholds to accurately detect when crossing 50%
+            }, { 
+                threshold: [0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0] // Fine-grained thresholds to accurately detect 50% crossing
+            });
             
-            mobileObserver.observe(mobileSection1);
-            mobileObserver.observe(mobileSection2);
+            if (mobileSection1) mobileObserver.observe(mobileSection1);
+            if (mobileSection2) mobileObserver.observe(mobileSection2);
         }
 
         window.addEventListener('load', () => {
