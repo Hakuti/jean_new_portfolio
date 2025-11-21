@@ -570,8 +570,59 @@
             constructor(prefix) {
                 this.prefix = prefix;
                 this.isRunning = false;
+                this.timeoutIds = [];
             }
             getElement(id) { return document.getElementById(this.prefix + id); }
+            
+            stop() {
+                this.isRunning = false;
+                // Clear all pending timeouts
+                this.timeoutIds.forEach(id => clearTimeout(id));
+                this.timeoutIds = [];
+                
+                // Reset visual state
+                const user = this.getElement('sim-user');
+                const controls = this.getElement('sim-controls');
+                const toast = this.getElement('sim-toast');
+                const saveBtn = this.getElement('sim-save-btn');
+                const callScreen = this.getElement('screen-call');
+                const activeCallScreen = this.getElement('screen-active-call');
+                const bubble1 = this.getElement('bubble-1');
+                const bubble2 = this.getElement('bubble-2');
+                
+                if (user) {
+                    user.style.transition = 'none';
+                    user.style.transform = 'none';
+                    user.style.opacity = '0';
+                }
+                if (toast) {
+                    toast.style.transform = 'translateY(-150%)';
+                    toast.style.opacity = '0';
+                }
+                if (controls) {
+                    controls.style.transform = 'translateY(0)';
+                }
+                if (saveBtn) {
+                    saveBtn.style.transform = 'scale(1)';
+                    saveBtn.style.backgroundColor = '#10B981';
+                }
+                if (callScreen) {
+                    callScreen.classList.add('hidden');
+                    callScreen.classList.remove('flex');
+                }
+                if (activeCallScreen) {
+                    activeCallScreen.classList.add('hidden');
+                    activeCallScreen.classList.remove('flex');
+                }
+                if (bubble1) {
+                    bubble1.style.opacity = '0';
+                    bubble1.style.transform = 'scale(0.9)';
+                }
+                if (bubble2) {
+                    bubble2.style.opacity = '0';
+                    bubble2.style.transform = 'scale(0.9)';
+                }
+            }
             
             run() {
                 if (this.isRunning) return;
@@ -615,64 +666,77 @@
                 }
 
                 // 1. Save
-                setTimeout(() => {
+                this.timeoutIds.push(setTimeout(() => {
+                    if (!this.isRunning) return;
                     saveBtn.style.transform = 'scale(0.95)';
                     saveBtn.style.backgroundColor = '#059669';
-                    setTimeout(() => saveBtn.style.transform = 'scale(1)', 200);
-                }, 1000);
+                    this.timeoutIds.push(setTimeout(() => {
+                        if (!this.isRunning) return;
+                        saveBtn.style.transform = 'scale(1)';
+                    }, 200));
+                }, 1000));
 
                 // 2. Hide Controls
-                setTimeout(() => {
+                this.timeoutIds.push(setTimeout(() => {
+                    if (!this.isRunning) return;
                     controls.style.transform = 'translateY(150%)';
-                }, 1800);
+                }, 1800));
 
                 // 3. Show Toast after controls are hidden (2.2s - after Set Zone Location is complete)
-                setTimeout(() => {
+                this.timeoutIds.push(setTimeout(() => {
+                    if (!this.isRunning) return;
                     toast.style.transform = 'translateY(0)';
                     toast.style.opacity = '1';
-                }, 2200);
+                }, 2200));
 
                 // 4. Walk
-                setTimeout(() => {
+                this.timeoutIds.push(setTimeout(() => {
+                    if (!this.isRunning) return;
                     user.style.opacity = '1';
                     user.style.transition = 'transform 3s linear';
                     user.style.transform = 'translate(100px, -140px)';
-                }, 2500);
+                }, 2500));
 
                 // 5. Call
-                setTimeout(() => {
+                this.timeoutIds.push(setTimeout(() => {
+                    if (!this.isRunning) return;
                     callScreen.classList.remove('hidden');
                     callScreen.classList.add('flex');
-                }, 5500);
+                }, 5500));
 
                 // 6. Answer
-                setTimeout(() => {
+                this.timeoutIds.push(setTimeout(() => {
+                    if (!this.isRunning) return;
                     if(answerBtn) answerBtn.style.transform = 'scale(0.9)';
-                }, 8000);
+                }, 8000));
 
                 // 7. Active
-                setTimeout(() => {
+                this.timeoutIds.push(setTimeout(() => {
+                    if (!this.isRunning) return;
                     callScreen.classList.add('hidden');
                     callScreen.classList.remove('flex');
                     activeCallScreen.classList.remove('hidden');
                     activeCallScreen.classList.add('flex');
-                }, 8500);
+                }, 8500));
 
                 // 8. Bubbles
-                setTimeout(() => {
+                this.timeoutIds.push(setTimeout(() => {
+                    if (!this.isRunning) return;
                     if(bubble1) {
                         bubble1.style.opacity = '1';
                         bubble1.style.transform = 'scale(1)';
                     }
-                }, 9000);
-                setTimeout(() => {
+                }, 9000));
+                this.timeoutIds.push(setTimeout(() => {
+                    if (!this.isRunning) return;
                     if(bubble2) {
                         bubble2.style.opacity = '1';
                         bubble2.style.transform = 'scale(1)';
                     }
-                }, 10000);
+                }, 10000));
 
-                setTimeout(() => { this.isRunning = false; this.run(); }, 14000);
+                // Don't auto-loop - let intersection observer restart it
+                this.timeoutIds.push(setTimeout(() => { this.isRunning = false; }, 14000));
             }
         }
 
@@ -680,8 +744,42 @@
             constructor(prefix) {
                 this.prefix = prefix;
                 this.isRunning = false;
+                this.timeoutIds = [];
             }
             getElement(id) { return document.getElementById(this.prefix + id); }
+            
+            stop() {
+                this.isRunning = false;
+                // Clear all pending timeouts
+                this.timeoutIds.forEach(id => clearTimeout(id));
+                this.timeoutIds = [];
+                
+                // Reset visual state
+                const setupPanel = this.getElement('remind-setup');
+                const timeLapse = this.getElement('remind-time-lapse');
+                const callScreen = this.getElement('remind-call');
+                const activeScreen = this.getElement('remind-active');
+                const bubble = this.getElement('remind-bubble');
+                
+                if (setupPanel) {
+                    setupPanel.style.opacity = '1';
+                }
+                if (timeLapse) {
+                    timeLapse.style.opacity = '0';
+                }
+                if (callScreen) {
+                    callScreen.classList.add('hidden');
+                    callScreen.classList.remove('flex');
+                }
+                if (activeScreen) {
+                    activeScreen.classList.add('hidden');
+                    activeScreen.classList.remove('flex');
+                }
+                if (bubble) {
+                    bubble.style.opacity = '0';
+                    bubble.style.transform = 'scale(0.9)';
+                }
+            }
 
             run() {
                 if (this.isRunning) return;
@@ -709,41 +807,55 @@
                 }
 
                 // 1. Click
-                setTimeout(() => {
+                this.timeoutIds.push(setTimeout(() => {
+                    if (!this.isRunning) return;
                     setBtn.style.transform = 'scale(0.95)';
-                    setTimeout(() => setBtn.style.transform = 'scale(1)', 200);
-                }, 1000);
+                    this.timeoutIds.push(setTimeout(() => {
+                        if (!this.isRunning) return;
+                        setBtn.style.transform = 'scale(1)';
+                    }, 200));
+                }, 1000));
 
                 // 2. Fade Setup
-                setTimeout(() => { setupPanel.style.opacity = '0'; }, 2000);
+                this.timeoutIds.push(setTimeout(() => {
+                    if (!this.isRunning) return;
+                    setupPanel.style.opacity = '0';
+                }, 2000));
 
                 // 3. Time Lapse
-                setTimeout(() => { timeLapse.style.opacity = '1'; }, 2500);
+                this.timeoutIds.push(setTimeout(() => {
+                    if (!this.isRunning) return;
+                    timeLapse.style.opacity = '1';
+                }, 2500));
 
                 // 4. Call
-                setTimeout(() => {
+                this.timeoutIds.push(setTimeout(() => {
+                    if (!this.isRunning) return;
                     timeLapse.style.opacity = '0';
                     callScreen.classList.remove('hidden');
                     callScreen.classList.add('flex');
-                }, 4500);
+                }, 4500));
 
                 // 5. Active
-                setTimeout(() => {
+                this.timeoutIds.push(setTimeout(() => {
+                    if (!this.isRunning) return;
                     callScreen.classList.add('hidden');
                     callScreen.classList.remove('flex');
                     activeScreen.classList.remove('hidden');
                     activeScreen.classList.add('flex');
-                }, 7000);
+                }, 7000));
 
                 // 6. Bubble (7.5s)
-                setTimeout(() => {
+                this.timeoutIds.push(setTimeout(() => {
+                    if (!this.isRunning) return;
                     if(bubble) {
                         bubble.style.opacity = '1';
                         bubble.style.transform = 'scale(1)';
                     }
-                }, 7500);
+                }, 7500));
 
-                setTimeout(() => { this.isRunning = false; this.run(); }, 12000);
+                // Don't auto-loop - let intersection observer restart it
+                this.timeoutIds.push(setTimeout(() => { this.isRunning = false; }, 12000));
             }
         }
 
@@ -767,17 +879,29 @@
 
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
+                    const sectionId = entry.target.id;
+                    
                     if (entry.isIntersecting) {
-                        const sectionId = entry.target.id;
+                        // Section is visible - start/reset animation
                         Object.values(screens).forEach(s => { if(s) s.classList.remove('active'); });
                         
-                        // Switch screens
                         if(sectionId === 'section-1') {
                             screens['section-1'].classList.add('active');
-                            if (!desktopSim.isRunning) desktopSim.run();
+                            // Stop any running animation and restart fresh
+                            desktopSim.stop();
+                            setTimeout(() => desktopSim.run(), 100);
                         } else if (sectionId === 'section-2') {
-                            screens['section-2'].classList.add('active'); // Reusing ID slot for simplicity
-                             if (!desktopRemindSim.isRunning) desktopRemindSim.run();
+                            screens['section-2'].classList.add('active');
+                            // Stop any running animation and restart fresh
+                            desktopRemindSim.stop();
+                            setTimeout(() => desktopRemindSim.run(), 100);
+                        }
+                    } else {
+                        // Section is not visible - stop animation
+                        if(sectionId === 'section-1') {
+                            desktopSim.stop();
+                        } else if (sectionId === 'section-2') {
+                            desktopRemindSim.stop();
                         }
                     }
                 });
@@ -797,25 +921,27 @@
                     const intersectionRatio = entry.intersectionRatio;
                     const isMoreThan50Percent = intersectionRatio > 0.5;
                     
+                    const sectionId = entry.target.id;
+                    
                     if (entry.isIntersecting && isMoreThan50Percent) {
                         // Section is more than 50% visible - start animation
-                        if (entry.target.id === 'section-1') {
-                            // Reset and restart animation
-                            mobileSim.isRunning = false;
-                            setTimeout(() => mobileSim.run(), 1000);
+                        if (sectionId === 'section-1') {
+                            // Stop and restart animation fresh
+                            mobileSim.stop();
+                            setTimeout(() => mobileSim.run(), 100);
                         }
-                        if (entry.target.id === 'section-2') {
-                            // Reset and restart animation
-                            mobileRemindSim.isRunning = false;
-                            setTimeout(() => mobileRemindSim.run(), 1000);
+                        if (sectionId === 'section-2') {
+                            // Stop and restart animation fresh
+                            mobileRemindSim.stop();
+                            setTimeout(() => mobileRemindSim.run(), 100);
                         }
                     } else {
-                        // Section is less than 50% visible or not visible - reset flag so it can restart
-                        if (entry.target.id === 'section-1') {
-                            mobileSim.isRunning = false;
+                        // Section is not visible enough - stop animation
+                        if (sectionId === 'section-1') {
+                            mobileSim.stop();
                         }
-                        if (entry.target.id === 'section-2') {
-                            mobileRemindSim.isRunning = false;
+                        if (sectionId === 'section-2') {
+                            mobileRemindSim.stop();
                         }
                     }
                 });
