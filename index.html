@@ -231,7 +231,7 @@
                                 <p class="text-gray-500 text-sm mb-6">Triggers whenever you enter this area.</p>
                                 <button id="dt-sim-save-btn" class="w-full bg-brand-green text-white py-3.5 rounded-xl font-bold text-base shadow-lg shadow-brand-green/25 transition-all">Save Zone</button>
                             </div>
-                            <div id="dt-sim-toast" class="absolute top-12 left-4 right-4 bg-brand-black/90 backdrop-blur text-white p-3 rounded-xl shadow-xl translate-y-[-150%] transition-all duration-500 z-40 flex items-center gap-3">
+                            <div id="dt-sim-toast" class="absolute top-12 left-4 right-4 bg-brand-black/90 backdrop-blur text-white p-3 rounded-xl shadow-xl translate-y-[-150%] transition-all duration-500 z-40 flex items-center gap-3" style="transform: translateY(-150%); opacity: 0;">
                                 <div class="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
                                 <div class="text-sm font-medium">Monitoring Active...</div>
                             </div>
@@ -313,19 +313,79 @@
                         <p class="text-lg text-gray-600 leading-relaxed mb-6">
                             Budgeting apps just report the damage. Unburdened uses geofencing to catch you <strong>in the moment</strong> you walk into a store.
                         </p>
-                        <ul class="space-y-2 text-sm text-gray-500">
+                        <ul class="space-y-2 text-sm text-gray-500 mb-8">
                             <li class="flex gap-2"><span class="text-brand-green">✓</span> High-precision Google Places detection</li>
                             <li class="flex gap-2"><span class="text-brand-green">✓</span> Real-time AI voice interventions</li>
                             <li class="flex gap-2"><span class="text-brand-green">✓</span> Native iOS integration</li>
                         </ul>
+                        <div class="flex flex-col sm:flex-row gap-4">
+                            <a href="https://apple.co/3K9fFwz" target="_blank" class="bg-white text-black px-6 py-3 rounded-full font-bold text-sm border-[1.75px] border-gray-200 shadow-md hover:shadow-lg transition-all duration-300 flex items-center justify-center gap-2">
+                                <span>Download the app</span>
+                                <img src="Apple_logo_black.svg.png" alt="Apple" class="w-4 h-auto object-contain">
+                            </a>
+                            <a href="https://unburdened.app" target="_blank" class="px-6 py-3 rounded-full font-bold text-sm text-brand-dark border border-gray-200 hover:bg-white transition-colors flex items-center justify-center gap-2">
+                                Check out the project website
+                                <span class="material-symbols-rounded text-sm">open_in_new</span>
+                            </a>
+                        </div>
                     </div>
                     <!-- Mobile Visual 1 -->
                     <div class="lg:hidden w-full max-w-[340px] mx-auto aspect-[9/16] bg-gray-50 rounded-[2.5rem] mobile-app-card relative overflow-hidden border-8 border-white shadow-2xl">
-                         <!-- Mobile content mirrors desktop logic via JS (simplified for brevity here, using same IDs as before but with 'mob-' prefix) -->
                         <div class="absolute inset-0 bg-map-pattern opacity-50"></div>
-                        <div id="mob-sim-user" class="absolute bottom-32 left-10 w-12 h-12 bg-blue-500/20 rounded-full flex items-center justify-center z-20"><div class="w-4 h-4 bg-blue-500 rounded-full shadow-lg border-2 border-white"></div></div>
-                        <div id="mob-sim-controls" class="absolute bottom-0 left-0 right-0 bg-white rounded-t-3xl p-6 shadow-[0_-10px_40px_rgba(0,0,0,0.05)] z-30"><button id="mob-sim-save-btn" class="w-full bg-brand-green text-white py-3 rounded-xl font-bold text-sm shadow-lg">Save Zone</button></div>
-                        <!-- ... other mobile sim elements ... -->
+                        <div class="absolute inset-0 overflow-hidden">
+                            <div class="absolute top-1/3 left-1/2 -translate-x-1/2 w-64 h-64 border-2 border-brand-red/30 rounded-full bg-brand-red/5 flex items-center justify-center animate-pulse-slow">
+                                <div class="w-48 h-48 border-2 border-brand-red/50 rounded-full bg-brand-red/10 flex items-center justify-center">
+                                    <div class="w-4 h-4 bg-brand-red rounded-full shadow-lg z-10 relative">
+                                        <div class="absolute -top-8 left-1/2 -translate-x-1/2 bg-white px-3 py-1 rounded-lg shadow-md text-xs font-bold text-brand-red border border-gray-100">Target</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="mob-sim-user" class="absolute bottom-32 left-10 w-12 h-12 bg-blue-500/20 rounded-full flex items-center justify-center walking-path z-20 opacity-0">
+                                <div class="w-4 h-4 bg-blue-500 rounded-full shadow-lg border-2 border-white"></div>
+                            </div>
+                        </div>
+                        <div id="mob-sim-controls" class="absolute bottom-0 left-0 right-0 bg-white rounded-t-3xl p-5 shadow-[0_-10px_40px_rgba(0,0,0,0.05)] z-30 transition-transform duration-500">
+                            <div class="w-12 h-1.5 bg-gray-200 rounded-full mx-auto mb-5"></div>
+                            <h3 class="text-base font-bold mb-1">Set Zone Location</h3>
+                            <p class="text-gray-500 text-xs mb-5">Triggers whenever you enter this area.</p>
+                            <button id="mob-sim-save-btn" class="w-full bg-brand-green text-white py-2.5 rounded-xl font-bold text-xs shadow-lg shadow-brand-green/25 transition-all">Save Zone</button>
+                        </div>
+                        <div id="mob-sim-toast" class="absolute top-4 left-4 right-4 bg-brand-black/90 backdrop-blur text-white p-3 rounded-xl shadow-xl translate-y-[-150%] transition-all duration-500 z-40 flex items-center gap-3" style="transform: translateY(-150%); opacity: 0;">
+                            <div class="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
+                            <div class="text-xs font-medium">Monitoring Active...</div>
+                        </div>
+
+                        <!-- MOBILE: Incoming Call -->
+                        <div id="mob-screen-call" class="screen-call absolute inset-0 hidden flex-col justify-center text-white bg-gray-900 z-50">
+                            <div class="relative z-10 flex flex-col h-full p-6 pt-12 text-center items-center">
+                                <div class="flex flex-col items-center mb-auto">
+                                    <div class="w-20 h-20 rounded-full bg-gray-800 border border-gray-700 flex items-center justify-center mb-4 mx-auto shadow-2xl shadow-brand-green/20">
+                                        <img src="https://api.dicebear.com/7.x/bottts/svg?seed=Maya" class="w-16 h-16 rounded-full">
+                                    </div>
+                                    <h2 class="text-2xl font-bold mb-1 text-white">Unburdened AI</h2>
+                                    <p class="text-brand-green font-bold text-xs uppercase tracking-widest mb-4">Incoming Intervention</p>
+                                    <div class="bg-gray-800 border border-gray-700 px-4 py-2 rounded-lg"><p class="text-white text-xs font-medium">High Risk Zone: Target</p></div>
+                                </div>
+                                <div class="flex justify-between w-full gap-4 px-2">
+                                    <div class="flex flex-col items-center gap-2"><button class="w-16 h-16 rounded-full bg-red-500 flex items-center justify-center shadow-lg"><span class="material-symbols-rounded text-2xl font-bold">call_end</span></button></div>
+                                    <div class="flex flex-col items-center gap-2"><button id="mob-sim-answer-btn" class="w-16 h-16 rounded-full bg-green-500 flex items-center justify-center shadow-lg animate-pulse transition-transform"><span class="material-symbols-rounded text-2xl font-bold">call</span></button></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- MOBILE: Active Call -->
+                        <div id="mob-screen-active-call" class="screen-active-call absolute inset-0 hidden flex-col items-center pt-16 px-4 bg-brand-black z-50">
+                            <img src="https://api.dicebear.com/7.x/bottts/svg?seed=Maya" class="w-24 h-24 rounded-full border-4 border-brand-green shadow-[0_0_30px_rgba(16,185,129,0.4)] mb-6 animate-float bg-gray-800">
+                            <h3 class="text-white text-xl font-black mb-1">Maya</h3>
+                            <p class="text-brand-green font-mono text-[10px] tracking-widest uppercase mb-8">Active Intervention...</p>
+                            <div class="w-full space-y-4">
+                                <div id="mob-bubble-1" class="bg-white/10 backdrop-blur p-3 rounded-2xl rounded-tl-sm text-white text-xs opacity-0 transform scale-90 transition-all duration-500">I see you walking into Target. 🎯</div>
+                                <div id="mob-bubble-2" class="bg-brand-red/20 backdrop-blur border border-brand-red/50 p-3 rounded-2xl rounded-tr-sm text-white text-xs ml-auto max-w-[90%] opacity-0 transform scale-90 transition-all duration-500">You don't need another candle. Go home. 🛑</div>
+                            </div>
+                            <div class="mt-auto mb-8 flex gap-8">
+                                <div class="w-14 h-14 rounded-full bg-brand-red flex items-center justify-center text-white shadow-lg"><span class="material-symbols-rounded">call_end</span></div>
+                            </div>
+                        </div>
                     </div>
                 </section>
 
@@ -340,8 +400,61 @@
                     </div>
                      <!-- Mobile Visual 2 -->
                      <div class="lg:hidden w-full max-w-[340px] mx-auto bg-white rounded-[2.5rem] mobile-app-card relative overflow-hidden border-8 border-white shadow-2xl h-[400px]">
-                        <div id="mob-remind-setup" class="absolute inset-0 p-6 flex flex-col justify-center"><button id="mob-remind-btn" class="w-full py-3 rounded-xl bg-blue-500 text-white font-bold text-xs shadow-lg">Set Reminder</button></div>
-                        <!-- ... other mobile sim elements ... -->
+                        <!-- Setup Screen -->
+                        <div id="mob-remind-setup" class="absolute inset-0 p-6 flex flex-col justify-center transition-all duration-500">
+                            <div class="flex items-center justify-between mb-4">
+                                <h3 class="font-bold text-lg text-brand-black">New Reminder</h3>
+                            </div>
+                            <div class="space-y-3 mb-4">
+                                <div class="p-3 bg-gray-50 rounded-xl border border-gray-100">
+                                    <p class="text-[10px] text-gray-400 font-bold uppercase mb-1">Name</p>
+                                    <p class="font-bold text-gray-800 text-sm">Netflix Subscription</p>
+                                </div>
+                                <div class="flex gap-2">
+                                    <div class="flex-1 p-3 bg-gray-50 rounded-xl border border-gray-100">
+                                        <p class="text-[10px] text-gray-400 font-bold uppercase mb-1">Frequency</p>
+                                        <p class="font-bold text-gray-800 text-sm">Monthly</p>
+                                    </div>
+                                    <div class="flex-1 p-3 bg-gray-50 rounded-xl border border-gray-100">
+                                        <p class="text-[10px] text-gray-400 font-bold uppercase mb-1">Date</p>
+                                        <p class="font-bold text-gray-800 text-sm">15th</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <button id="mob-remind-btn" class="w-full py-3 rounded-xl bg-blue-500 text-white font-bold text-xs shadow-lg shadow-blue-500/30 transition-all">Set Reminder Call</button>
+                        </div>
+
+                        <!-- Time Lapse -->
+                        <div id="mob-remind-time-lapse" class="absolute inset-0 bg-black/90 z-50 flex items-center justify-center text-white opacity-0 pointer-events-none transition-opacity duration-500">
+                            <div class="text-center">
+                                <span class="material-symbols-rounded text-4xl mb-2 animate-pulse">calendar_month</span>
+                                <p class="font-mono text-sm">One Month Later...</p>
+                            </div>
+                        </div>
+
+                        <!-- Call Overlay -->
+                        <div id="mob-remind-call" class="absolute inset-0 bg-gray-900 z-40 hidden flex-col justify-center text-white">
+                            <div class="relative z-10 flex flex-col h-full p-6 pt-12 text-center items-center">
+                                <div class="flex flex-col items-center mb-auto">
+                                    <div class="w-20 h-20 rounded-full bg-gray-800 border border-gray-700 flex items-center justify-center mb-4 mx-auto shadow-2xl shadow-blue-500/20">
+                                        <img src="https://api.dicebear.com/7.x/bottts/svg?seed=Maya" class="w-16 h-16 rounded-full">
+                                    </div>
+                                    <h2 class="text-2xl font-bold mb-1 text-white">Unburdened AI</h2>
+                                    <p class="text-blue-400 font-bold text-xs uppercase tracking-widest mb-4">Payment Reminder</p>
+                                    <div class="bg-gray-800 border border-gray-700 px-4 py-2 rounded-lg"><p class="text-white text-xs font-medium">Netflix Due Tomorrow</p></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Active Reminder -->
+                        <div id="mob-remind-active" class="absolute inset-0 bg-brand-black z-50 hidden flex-col items-center pt-16 px-4">
+                            <img src="https://api.dicebear.com/7.x/bottts/svg?seed=Maya" class="w-24 h-24 rounded-full border-4 border-blue-500 shadow-[0_0_30px_rgba(59,130,246,0.4)] mb-6 animate-float bg-gray-800">
+                            <h3 class="text-white text-xl font-black mb-1">Maya</h3>
+                            <p class="text-blue-400 font-mono text-[10px] tracking-widest uppercase mb-8">Payment Check-in...</p>
+                            <div class="w-full space-y-4">
+                                <div id="mob-remind-bubble" class="bg-white/10 backdrop-blur p-3 rounded-2xl rounded-tl-sm text-white text-xs opacity-0 transform scale-90 transition-all duration-500">Netflix hits tomorrow. Do you have the $15? 💸</div>
+                            </div>
+                        </div>
                     </div>
                 </section>
              </div>
@@ -403,48 +516,6 @@
                         <li>Extended the capabilities of Knex.js for more flexible MySQL querying.</li>
                     </ul>
                 </div>
-
-                <!-- Job 4 -->
-                <div class="bg-white p-8 rounded-3xl shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
-                    <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-4">
-                        <div>
-                            <h3 class="text-xl font-bold text-brand-black">Freelance Developer</h3>
-                            <p class="text-brand-green font-medium">Full Stack Developer</p>
-                        </div>
-                        <span class="text-sm text-gray-400 mt-2 md:mt-0">2019 - May 2021</span>
-                    </div>
-                    <ul class="list-disc list-inside space-y-2 text-gray-600 text-sm leading-relaxed">
-                        <li>Developed custom web applications for various clients using modern JavaScript frameworks.</li>
-                        <li>Collaborated with clients to understand requirements and deliver scalable solutions.</li>
-                        <li>Maintained and optimized existing codebases for improved performance.</li>
-                    </ul>
-                </div>
-            </div>
-
-            <!-- Expandable Section -->
-            <div id="more-experience" class="hidden space-y-8 mt-8">
-                <!-- Additional jobs can be added here -->
-                <!-- Job 5 - Example placeholder -->
-                <div class="bg-white p-8 rounded-3xl shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
-                    <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-4">
-                        <div>
-                            <h3 class="text-xl font-bold text-brand-black">Additional Experience</h3>
-                            <p class="text-brand-green font-medium">See full resume for complete work history</p>
-                        </div>
-                        <span class="text-sm text-gray-400 mt-2 md:mt-0">Earlier Positions</span>
-                    </div>
-                    <p class="text-gray-600 text-sm leading-relaxed">
-                        For a complete list of all work experience, projects, and achievements, please download the full resume below.
-                    </p>
-                </div>
-            </div>
-
-            <!-- Expand/Collapse Button -->
-            <div class="text-center mt-8">
-                <button id="toggle-experience" class="inline-flex items-center gap-2 text-brand-black font-semibold px-6 py-3 rounded-full border-2 border-brand-black hover:bg-brand-black hover:text-white transition-all duration-300">
-                    <span id="toggle-text">Show More Experience</span>
-                    <span class="material-symbols-rounded text-sm" id="toggle-icon">expand_more</span>
-                </button>
             </div>
             
             <div class="text-center mt-12">
@@ -516,21 +587,32 @@
                 const bubble1 = this.getElement('bubble-1');
                 const bubble2 = this.getElement('bubble-2');
 
-                if (!user || !controls) { this.isRunning = false; return; }
+                // SAFETY CHECK
+                if (!user || !controls || !toast || !saveBtn || !answerBtn || !callScreen || !activeCallScreen) {
+                    this.isRunning = false;
+                    return;
+                }
 
                 // Reset
                 user.style.transition = 'none';
                 user.style.transform = 'none';
                 user.style.opacity = '0';
                 toast.style.transform = 'translateY(-150%)';
+                toast.style.opacity = '0';
                 saveBtn.style.transform = 'scale(1)';
                 saveBtn.style.backgroundColor = '#10B981';
                 callScreen.classList.add('hidden');
                 callScreen.classList.remove('flex');
                 activeCallScreen.classList.add('hidden');
                 activeCallScreen.classList.remove('flex');
-                if(bubble1) bubble1.style.opacity = '0';
-                if(bubble2) bubble2.style.opacity = '0';
+                if(bubble1) {
+                    bubble1.style.opacity = '0';
+                    bubble1.style.transform = 'scale(0.9)';
+                }
+                if(bubble2) {
+                    bubble2.style.opacity = '0';
+                    bubble2.style.transform = 'scale(0.9)';
+                }
 
                 // 1. Save
                 setTimeout(() => {
@@ -542,28 +624,33 @@
                 // 2. Hide Controls
                 setTimeout(() => {
                     controls.style.transform = 'translateY(150%)';
-                    toast.style.transform = 'translateY(0)';
                 }, 1800);
 
-                // 3. Walk
+                // 3. Show Toast after controls are hidden (2.2s - after Set Zone Location is complete)
+                setTimeout(() => {
+                    toast.style.transform = 'translateY(0)';
+                    toast.style.opacity = '1';
+                }, 2200);
+
+                // 4. Walk
                 setTimeout(() => {
                     user.style.opacity = '1';
                     user.style.transition = 'transform 3s linear';
                     user.style.transform = 'translate(100px, -140px)';
                 }, 2500);
 
-                // 4. Call
+                // 5. Call
                 setTimeout(() => {
                     callScreen.classList.remove('hidden');
                     callScreen.classList.add('flex');
                 }, 5500);
 
-                // 5. Answer
+                // 6. Answer
                 setTimeout(() => {
                     if(answerBtn) answerBtn.style.transform = 'scale(0.9)';
                 }, 8000);
 
-                // 6. Active
+                // 7. Active
                 setTimeout(() => {
                     callScreen.classList.add('hidden');
                     callScreen.classList.remove('flex');
@@ -571,9 +658,19 @@
                     activeCallScreen.classList.add('flex');
                 }, 8500);
 
-                // 7. Bubbles
-                setTimeout(() => { if(bubble1) { bubble1.style.opacity = '1'; bubble1.style.transform = 'scale(1)'; } }, 9000);
-                setTimeout(() => { if(bubble2) { bubble2.style.opacity = '1'; bubble2.style.transform = 'scale(1)'; } }, 10000);
+                // 8. Bubbles
+                setTimeout(() => {
+                    if(bubble1) {
+                        bubble1.style.opacity = '1';
+                        bubble1.style.transform = 'scale(1)';
+                    }
+                }, 9000);
+                setTimeout(() => {
+                    if(bubble2) {
+                        bubble2.style.opacity = '1';
+                        bubble2.style.transform = 'scale(1)';
+                    }
+                }, 10000);
 
                 setTimeout(() => { this.isRunning = false; this.run(); }, 14000);
             }
@@ -606,7 +703,10 @@
                 callScreen.classList.remove('flex');
                 activeScreen.classList.add('hidden');
                 activeScreen.classList.remove('flex');
-                if(bubble) bubble.style.opacity = '0';
+                if(bubble) {
+                    bubble.style.opacity = '0';
+                    bubble.style.transform = 'scale(0.9)';
+                }
 
                 // 1. Click
                 setTimeout(() => {
@@ -635,8 +735,13 @@
                     activeScreen.classList.add('flex');
                 }, 7000);
 
-                // 6. Bubble
-                setTimeout(() => { if(bubble) { bubble.style.opacity = '1'; bubble.style.transform = 'scale(1)'; } }, 7500);
+                // 6. Bubble (7.5s)
+                setTimeout(() => {
+                    if(bubble) {
+                        bubble.style.opacity = '1';
+                        bubble.style.transform = 'scale(1)';
+                    }
+                }, 7500);
 
                 setTimeout(() => { this.isRunning = false; this.run(); }, 12000);
             }
@@ -645,7 +750,8 @@
         const desktopSim = new SimulationController('dt-');
         const desktopRemindSim = new ReminderSimulationController('dt-');
         
-        // Placeholder for mobile logic if needed, currently hidden via lg:hidden blocks but logic can be duplicated if you want mobile sims too
+        const mobileSim = new SimulationController('mob-');
+        const mobileRemindSim = new ReminderSimulationController('mob-');
 
         if (window.innerWidth >= 1024) {
             const screens = {
@@ -680,28 +786,51 @@
             sections.forEach(section => observer.observe(section));
         }
 
-        // --- EXPAND/COLLAPSE EXPERIENCE ---
-        const toggleBtn = document.getElementById('toggle-experience');
-        const moreExperience = document.getElementById('more-experience');
-        const toggleText = document.getElementById('toggle-text');
-        const toggleIcon = document.getElementById('toggle-icon');
-
-        if (toggleBtn && moreExperience) {
-            toggleBtn.addEventListener('click', () => {
-                const isHidden = moreExperience.classList.contains('hidden');
-                
-                if (isHidden) {
-                    moreExperience.classList.remove('hidden');
-                    moreExperience.style.animation = 'slideUp 0.5s ease-out forwards';
-                    toggleText.textContent = 'Show Less Experience';
-                    toggleIcon.textContent = 'expand_less';
-                } else {
-                    moreExperience.classList.add('hidden');
-                    toggleText.textContent = 'Show More Experience';
-                    toggleIcon.textContent = 'expand_more';
-                }
-            });
+        // --- MOBILE LOGIC ---
+        if (window.innerWidth < 1024) {
+            const mobileSection1 = document.getElementById('section-1');
+            const mobileSection2 = document.getElementById('section-2');
+            
+            const mobileObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    // Check if more than 50% visible
+                    const intersectionRatio = entry.intersectionRatio;
+                    const isMoreThan50Percent = intersectionRatio > 0.5;
+                    
+                    if (entry.isIntersecting && isMoreThan50Percent) {
+                        // Section is more than 50% visible - start animation
+                        if (entry.target.id === 'section-1') {
+                            // Reset and restart animation
+                            mobileSim.isRunning = false;
+                            setTimeout(() => mobileSim.run(), 1000);
+                        }
+                        if (entry.target.id === 'section-2') {
+                            // Reset and restart animation
+                            mobileRemindSim.isRunning = false;
+                            setTimeout(() => mobileRemindSim.run(), 1000);
+                        }
+                    } else {
+                        // Section is less than 50% visible or not visible - reset flag so it can restart
+                        if (entry.target.id === 'section-1') {
+                            mobileSim.isRunning = false;
+                        }
+                        if (entry.target.id === 'section-2') {
+                            mobileRemindSim.isRunning = false;
+                        }
+                    }
+                });
+            }, { threshold: [0, 0.25, 0.5, 0.75, 1] }); // Multiple thresholds to accurately detect when crossing 50%
+            
+            mobileObserver.observe(mobileSection1);
+            mobileObserver.observe(mobileSection2);
         }
+
+        window.addEventListener('load', () => {
+            // Only auto-start desktop animations on load
+            if (window.innerWidth >= 1024) {
+                setTimeout(() => desktopSim.run(), 500);
+            }
+        });
     </script>
 </body>
 </html>
